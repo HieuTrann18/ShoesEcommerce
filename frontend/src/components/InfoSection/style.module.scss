@@ -1,0 +1,34 @@
+@import "@styles/_mixin.module.scss";
+@import "@styles/_variable.module.scss";
+.infoSection__container{
+    @include flex(space-between, center, 0px);
+    height: 144px;
+    background-color: $primary_color;
+    margin-top: -90px;
+    padding: 15px 50px;
+}
+
+.infoSection__wrapper{
+    @include flex(center, center, 20px);
+    padding: 15px;
+}
+
+.infoSection__icons{
+    width: 50px;
+    height: 50px;
+}
+
+.infoSection__content{
+    @include flex(center, flex-start, 15px);
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.infoSection__title{
+    color: $white_color;
+    font-size: 17px;
+}
+
+.infoSection__text{
+    color: $sub_color;
+}

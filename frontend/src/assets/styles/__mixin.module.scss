@@ -1,0 +1,18 @@
+@mixin radius_common($radius: 10px){
+    border-radius: $radius;
+}
+
+@mixin btn($w, $h, $radius, $bgcolor: #fff){
+    border: 1px solid #e1e1e1;
+    width: $w;
+    height: $h;
+    background-color: $bgcolor;
+    @include radius_common($radius)
+}
+
+@mixin flex($x, $y, $gap: 10px){
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+    gap: $gap;
+}

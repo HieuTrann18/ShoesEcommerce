@@ -1,0 +1,28 @@
+@import "@styles/_mixin.module.scss";
+@import "@styles/_variable.module.scss";
+.banner__container{
+    @include flex(center, center, 0px);
+    background-image: url("../../assets/images/banner.png");
+    min-height: 750px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.banner__content{
+     @include flex(center, center, 30px);
+     flex-direction: column;
+}
+
+.banner__title{
+    font-size: 42px;
+    color: $four_color;
+    font-weight: 400;
+    margin: 0;
+}
+
+.banner__description{
+    font-size: 16px;
+    color: $third_color;
+    margin: 0;
+}

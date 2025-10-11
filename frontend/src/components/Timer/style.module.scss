@@ -1,0 +1,20 @@
+@import "@styles/_variable.module.scss";
+@import "@styles/_mixin.module.scss";
+.timer__container{
+    @include flex(center, center, 0px);
+    flex-direction: row;
+}
+
+.element__timer{
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 0 5px;
+
+}
+
+.element_interval{
+    font-size: 18px;
+    color: $secondary_color;
+    margin: 0 5px;
+}

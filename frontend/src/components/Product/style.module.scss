@@ -1,0 +1,10 @@
+@import "@styles/_mixin.module.scss";
+@import "@styles/_variable.module.scss";
+
+.product__container{
+    @include flex(space-between, center, 10px)
+}
+
+.product__sub{
+    @include flex(center, center, 10px)
+}
