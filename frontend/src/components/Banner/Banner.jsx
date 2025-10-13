@@ -7,6 +7,7 @@ const Banner = () => {
     banner__content,
     banner__title,
     banner__description,
+    banner__btn,
   } = styles;
   return (
     <div className={banner__container}>
@@ -15,7 +16,9 @@ const Banner = () => {
         <p className={banner__description}>
           Make yours celebrations even more special this years with beautiful.
         </p>
-        <Button content={"Go to shop"} />
+        <div className={banner__btn}>
+          <Button content={"Go to shop"} />
+        </div>
       </div>
     </div>
   );

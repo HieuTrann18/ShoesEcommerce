@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import HeaderIconGroup from "./HeaderIconGroup/HeaderIconGroup";
 import Navigation from "./Navigation/Navigation";
 import styles from "./styles.module.scss";
 import Logo from "@images/logo.png";
 import { listIcons, listNavigation } from "./constants";
+import { SideBarContext } from "../../contexts/SideBar";
 const Header = () => {
   const {
     header__wrapper,
@@ -13,6 +14,9 @@ const Header = () => {
     header__logo,
     wrapper,
   } = styles;
+
+  const { isOpen, setIsOpen } = useContext(SideBarContext);
+
   return (
     <header className={header__container}>
       <div className={header__wrapper}>
@@ -46,6 +50,7 @@ const Header = () => {
                 key={item.content}
                 content={item.content}
                 href={item.href}
+                setIsOpen={setIsOpen}
               />
             ))}
           </div>

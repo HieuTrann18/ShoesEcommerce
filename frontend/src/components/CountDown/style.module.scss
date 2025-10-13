@@ -1,23 +1,26 @@
 @import "@styles/_mixin.module.scss";
 @import "@styles/_variable.module.scss";
 
-
-.countDown__container{
-    background-image: url("../../assets/images/outstanding.png");
-    height: 409px;
-    width: calc(100%/2.04);
-    background-repeat: no-repeat;
-    background-size: cover;
+.countDown__container {
+  background-image: url("../../assets/images/outstanding.png");
+  height: 409px;
+  width: calc(100% / 2.04);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.countDown__timer{
-    @include flex(center, center, 10px);
-    height: 100%;
-    flex-direction: column;
+.countDown__timer {
+  @include flex(center, center, 10px);
+  height: 100%;
+  flex-direction: column;
 }
 
-.countDown__title{
-    font-size: 28px;
-    font-weight: 400;   
-    color: $primary_color;
+.countDown__title {
+  font-size: 28px;
+  font-weight: 400;
+  color: $primary_color;
+}
+
+.countDown__btn {
+  width: 172px;
 }

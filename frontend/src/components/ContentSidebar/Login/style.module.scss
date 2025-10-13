@@ -1,0 +1,26 @@
+@import "@styles/_mixin.module.scss";
+@import "@styles/_variable.module.scss";
+.login__container {
+  padding: 30px 20px 0 20px;
+  .login__title {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .login__checkbox {
+    margin-bottom: 30px;
+    input {
+      margin-right: 10px;
+    }
+    span {
+      color: $secondary_color;
+    }
+  }
+  .login__lostpassword {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: $secondary_color;
+    cursor: pointer;
+  }
+}
