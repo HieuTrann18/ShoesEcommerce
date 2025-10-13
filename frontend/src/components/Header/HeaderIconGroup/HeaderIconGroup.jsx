@@ -6,7 +6,7 @@ import youtube from "@images/youtube.png";
 import reload from "@images/sync.png";
 import heart from "@images/heart.png";
 import cart from "@images/shopping-cart.png";
-const HeaderIconGroup = ({ type, href }) => {
+const HeaderIconGroup = ({ type, href, handleOpenSidebar }) => {
   const { header__icons, header__icons__item } = styles;
 
   const handleRenderIcon = (type) => {
@@ -27,7 +27,7 @@ const HeaderIconGroup = ({ type, href }) => {
   };
 
   return (
-    <div className={header__icons}>
+    <div onClick={() => handleOpenSidebar(type)} className={header__icons}>
       <img
         className={header__icons__item}
         src={handleRenderIcon(type)}

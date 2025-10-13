@@ -4,6 +4,7 @@ import { SideBarContext } from "../../contexts/SideBar";
 import className from "classnames";
 import close from "@images/close.png";
 import Login from "@components/ContentSidebar/Login/Login";
+import Compare from "@components/ContentSidebar/Compare/Compare";
 const Sidebar = () => {
   const {
     sidebar__container,
@@ -13,7 +14,22 @@ const Sidebar = () => {
     sidebar__close,
     close__icon,
   } = styles;
-  const { isOpen, setIsOpen } = useContext(SideBarContext);
+  const { isOpen, setIsOpen, type } = useContext(SideBarContext);
+
+  const handleRenderContent = () => {
+    switch (type) {
+      case "login":
+        return <Login />;
+      case "reload":
+        return <Compare />;
+      case "heart":
+        return "wishlist";
+      case "cart":
+        return "cart";
+      default:
+        return <Login />;
+    }
+  };
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -30,7 +46,7 @@ const Sidebar = () => {
             <img className={close__icon} src={close} alt="" />
           </div>
         )}
-        <Login />
+        {handleRenderContent()}
       </div>
     </div>
   );

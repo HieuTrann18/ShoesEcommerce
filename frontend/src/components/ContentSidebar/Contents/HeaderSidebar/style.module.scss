@@ -1,0 +1,10 @@
+@import "@styles/_mixin.module.scss";
+@import "@styles/_variable.module.scss";
+
+.head__container {
+  @include flex(center, center, 10px);
+  flex-direction: column;
+  div {
+    font-size: 18px;
+  }
+}

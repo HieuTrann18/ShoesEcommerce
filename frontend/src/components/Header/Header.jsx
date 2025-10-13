@@ -15,7 +15,12 @@ const Header = () => {
     wrapper,
   } = styles;
 
-  const { isOpen, setIsOpen } = useContext(SideBarContext);
+  const { setIsOpen, setType } = useContext(SideBarContext);
+
+  const handleOpenSidebar = (type) => {
+    setIsOpen(true);
+    setType(type);
+  };
 
   return (
     <header className={header__container}>
@@ -57,9 +62,11 @@ const Header = () => {
           <div className={header__icons__wrapper}>
             {listIcons.slice(3, listIcons.length).map((item) => (
               <HeaderIconGroup
+                handleOpenSidebar={handleOpenSidebar}
                 key={item.type}
                 type={item.type}
                 href={item.href}
+                setIsOpen={setIsOpen}
               />
             ))}
           </div>

@@ -22,7 +22,6 @@ const HomePage = () => {
     loadData();
   }, []);
 
-  console.log("check props", listProduct);
   return (
     <div className={header__parent}>
       <Header />
