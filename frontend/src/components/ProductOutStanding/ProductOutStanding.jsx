@@ -6,16 +6,16 @@ import ProductCard from "@components/ProductCard/ProductCard";
 
 const Product = ({ data }) => {
   const { product__container, product__sub } = styles;
-  console.log("check", data);
+
   return (
     <>
       <div className={product__container}>
         <CountDown />
         <div className={product__sub}>
-          {data.map((item) => {
+          {data.map((item, index) => {
             return (
               <ProductCard
-                key={item.id}
+                key={index}
                 src={item.images[0]}
                 previews={item.images[1]}
                 name={item.name}

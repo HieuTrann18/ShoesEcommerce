@@ -1,18 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../styles.module.scss";
 import { SideBarContext } from "../../../contexts/SideBar";
+import { StoreContext } from "../../../contexts/Store";
+import Cookies from "js-cookie";
 const Navigation = ({ content, href }) => {
-  const { header__nav__item } = styles;
+  const { header__nav__item, sub__menu } = styles;
+  const [isShowSubMenu, setShowSubMenu] = useState(false);
   const { setIsOpen, setType } = useContext(SideBarContext);
+  const { userInfo, handleLogOut } = useContext(StoreContext);
   const handleClickShowLogin = () => {
-    if (content === "Sign In") {
+    if (content === "Sign In" && !userInfo) {
       setIsOpen(true);
       setType("login");
     }
   };
+  const handleRenderText = (content) => {
+    if (content === "Sign In" && userInfo) {
+      return `Hello ${userInfo?.username}`;
+    } else {
+      return content;
+    }
+  };
+  const handleHover = () => {
+    if (content === "Sign In" && userInfo) {
+      setShowSubMenu(true);
+    }
+  };
+
   return (
-    <div className={header__nav__item} onClick={handleClickShowLogin}>
-      {content}
+    <div
+      className={header__nav__item}
+      onMouseEnter={handleHover}
+      onClick={handleClickShowLogin}
+    >
+      {handleRenderText(content)}
+      {isShowSubMenu && (
+        <div
+          onClick={handleLogOut}
+          onMouseLeave={() => setShowSubMenu(false)}
+          className={sub__menu}
+        >
+          Log out
+        </div>
+      )}
     </div>
   );
 };

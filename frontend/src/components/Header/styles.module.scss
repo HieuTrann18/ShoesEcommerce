@@ -44,6 +44,14 @@
   font-size: 15px;
   cursor: pointer;
   color: $primary_color;
+  position: relative;
+  .sub__menu {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+    top: 40px;
+  }
 }
 
 .header__nav__item::after {

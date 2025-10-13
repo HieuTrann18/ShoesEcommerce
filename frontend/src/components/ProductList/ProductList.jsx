@@ -6,9 +6,9 @@ const ProductList = ({ data }) => {
   return (
     <div className={list__container}>
       {" "}
-      {data.map((item) => (
+      {data.map((item, index) => (
         <ProductCard
-          key={item.id}
+          key={index}
           src={item.images[0]}
           previews={item.images[1]}
           name={item.name}

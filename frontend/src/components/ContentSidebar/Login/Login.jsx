@@ -7,6 +7,8 @@ import * as Yup from "yup";
 import { ToastContext } from "../../../contexts/Toast";
 import { register, signIn } from "../../../apis/authService";
 import Cookies from "js-cookie";
+import { SideBarContext } from "../../../contexts/SideBar";
+import { StoreContext } from "../../../contexts/Store";
 const Login = () => {
   const {
     login__container,
@@ -14,6 +16,8 @@ const Login = () => {
     login__checkbox,
     login__lostpassword,
   } = styles;
+  const { setIsOpen } = useContext(SideBarContext);
+  const { setUserId } = useContext(StoreContext);
   const [isRegister, setIsRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useContext(ToastContext);
@@ -51,10 +55,14 @@ const Login = () => {
       if (!isRegister) {
         await signIn({ username, password })
           .then((res) => {
+            setIsLoading(false);
             const { id, token, refreshToken } = res.data;
+            setUserId(id);
             Cookies.set("token", token);
             Cookies.set("refreshToken", refreshToken);
-            setIsLoading(false);
+            Cookies.set("userId", id);
+            toast.success("Login successfully");
+            setIsOpen(false);
           })
           .catch((err) => {
             setIsLoading(false);
@@ -67,8 +75,6 @@ const Login = () => {
     setIsRegister(!isRegister);
     formik.resetForm();
   };
-
-  useEffect(() => {}, []);
 
   console.log(formik.errors);
   return (
