@@ -5,6 +5,8 @@ import className from "classnames";
 import close from "@images/close.png";
 import Login from "@components/ContentSidebar/Login/Login";
 import Compare from "@components/ContentSidebar/Compare/Compare";
+import WishList from "@components/ContentSidebar/WishList/WishList";
+import Cart from "@components/ContentSidebar/Cart/Cart";
 const Sidebar = () => {
   const {
     sidebar__container,
@@ -23,9 +25,9 @@ const Sidebar = () => {
       case "reload":
         return <Compare />;
       case "heart":
-        return "wishlist";
+        return <WishList />;
       case "cart":
-        return "cart";
+        return <Cart />;
       default:
         return <Login />;
     }

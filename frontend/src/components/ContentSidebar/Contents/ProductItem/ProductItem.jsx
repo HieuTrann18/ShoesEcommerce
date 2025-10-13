@@ -3,8 +3,14 @@ import styles from "./style.module.scss";
 import prd1 from "@images/prd1.png";
 import { IoMdClose } from "react-icons/io";
 const ProductItem = () => {
-  const { product__container, content__wrapper, title, price, btn__close } =
-    styles;
+  const {
+    product__container,
+    content__wrapper,
+    title,
+    price,
+    btn__close,
+    size,
+  } = styles;
   return (
     <div className={product__container}>
       <img src={prd1} alt="" />
@@ -13,7 +19,9 @@ const ProductItem = () => {
       </div>
       <div className={content__wrapper}>
         <div className={title}>title of product</div>
+        <div className={size}>Size: M</div>
         <div className={price}>$119.99</div>
+        <div className={price}>SKU: 12349</div>
       </div>
     </div>
   );

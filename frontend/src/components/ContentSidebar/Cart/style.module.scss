@@ -1,9 +1,18 @@
 @import "@styles/_mixin.module.scss";
 @import "@styles/_variable.module.scss";
-.compare__container {
+
+.cart__container {
   @include flex(space-between, space-between, 0px);
   flex-direction: column;
   margin-top: 20px;
   padding: 0 10px;
   height: 95vh;
+  .cart__total {
+    @include flex(space-between, center, 0px);
+  }
+  .btn__wrapper {
+    button {
+      margin: 3px 0px;
+    }
+  }
 }
