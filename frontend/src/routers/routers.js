@@ -6,8 +6,8 @@ const routers = [
     component: lazy(() => import("../pages/HomePage/HomePage")),
   },
   {
-    path: "/blog",
-    component: lazy(() => import("../pages/Blog/Blog")),
+    path: "/shop",
+    component: lazy(() => import("../pages/OurShop/OurShop")),
   },
 ];
 

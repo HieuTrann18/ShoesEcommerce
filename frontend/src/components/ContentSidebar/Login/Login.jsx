@@ -1,14 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
-import InputCommon from "../../InputCommon/InputCommon";
-import styles from "./style.module.scss";
-import Button from "@components/Button/Button";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { ToastContext } from "../../../contexts/Toast";
-import { register, signIn } from "../../../apis/authService";
 import Cookies from "js-cookie";
-import { SideBarContext } from "../../../contexts/SideBar";
+
 import { StoreContext } from "../../../contexts/Store";
+import { SideBarContext } from "../../../contexts/SideBar";
+import { ToastContext } from "../../../contexts/Toast";
+
+import { register, signIn } from "../../../apis/authService";
+
+import Button from "@components/Button/Button";
+import InputCommon from "../../InputCommon/InputCommon";
+
+import styles from "./style.module.scss";
+
 const Login = () => {
   const {
     login__container,
@@ -16,11 +21,17 @@ const Login = () => {
     login__checkbox,
     login__lostpassword,
   } = styles;
+
+  // Context
   const { setIsOpen } = useContext(SideBarContext);
   const { setUserId } = useContext(StoreContext);
+  const { toast } = useContext(ToastContext);
+
+  // State
   const [isRegister, setIsRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useContext(ToastContext);
+
+  // Formik
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -41,76 +52,71 @@ const Login = () => {
       if (isLoading) return;
       const { email: username, password } = values;
       setIsLoading(true);
-      if (isRegister) {
-        await register({ username, password })
-          .then((res) => {
-            toast.success(res.data.message);
-            setIsLoading(false);
-          })
-          .catch((err) => {
-            toast.error(err.response.data.message);
-            setIsLoading(false);
-          });
-      }
-      if (!isRegister) {
-        await signIn({ username, password })
-          .then((res) => {
-            setIsLoading(false);
-            const { id, token, refreshToken } = res.data;
-            setUserId(id);
-            Cookies.set("token", token);
-            Cookies.set("refreshToken", refreshToken);
-            Cookies.set("userId", id);
-            toast.success("Login successfully");
-            setIsOpen(false);
-          })
-          .catch((err) => {
-            setIsLoading(false);
-          });
+
+      try {
+        if (isRegister) {
+          const res = await register({ username, password });
+          toast.success(res.data.message);
+        } else {
+          const res = await signIn({ username, password });
+          const { id, token, refreshToken } = res.data;
+          setUserId(id);
+          Cookies.set("token", token);
+          Cookies.set("refreshToken", refreshToken);
+          Cookies.set("userId", id);
+          toast.success("Login successfully");
+          setIsOpen(false);
+        }
+      } catch (err) {
+        toast.error(err.response?.data?.message || "Something went wrong");
+      } finally {
+        setIsLoading(false);
       }
     },
   });
 
+  // Toggle Register / Login
   const handleToggle = () => {
     setIsRegister(!isRegister);
     formik.resetForm();
   };
 
-  console.log(formik.errors);
   return (
     <div className={login__container}>
       <div className={login__title}>{isRegister ? "SIGN UP" : "SIGN IN"}</div>
+
       <form onSubmit={formik.handleSubmit}>
         <InputCommon
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.email}
           id="email"
-          label={"Username or email"}
-          type={"text"}
+          label="Username or email"
+          type="text"
           isRequired
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           formik={formik}
         />
 
         <InputCommon
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.password}
           id="password"
-          label={"Password"}
-          type={"password"}
+          label="Password"
+          type="password"
           isRequired
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           formik={formik}
         />
+
         {isRegister && (
           <InputCommon
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.cfmpassword}
             id="cfmpassword"
-            label={"Confirm Password"}
-            type={"password"}
+            label="Confirm Password"
+            type="password"
             isRequired
+            value={formik.values.cfmpassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             formik={formik}
           />
         )}
@@ -122,17 +128,19 @@ const Login = () => {
           </div>
         )}
 
-        <Button content={isRegister ? "Register" : "Sign up"} type={"submit"} />
+        <Button content={isRegister ? "Register" : "Sign up"} type="submit" />
       </form>
+
       <Button
         content={
           isRegister ? "Already have an account?" : "Don't have an account?"
         }
-        type={"submit"}
+        type="button"
         isPrimary={false}
         style={{ marginTop: "10px" }}
         onClick={handleToggle}
       />
+
       {!isRegister && (
         <div className={login__lostpassword}>Lost your password</div>
       )}

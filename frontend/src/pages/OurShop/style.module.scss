@@ -1,0 +1,42 @@
+@import "@styles/_variable.module.scss";
+@import "@styles/_mixin.module.scss";
+
+.shop__container {
+  margin-top: 83px;
+  .shop__function {
+    @include flex(space-between, center, 0px);
+    font-size: 14px;
+    font-weight: 300;
+    color: $secondary_color;
+    .special__text {
+      color: $primary_color;
+      font-weight: 400;
+    }
+    .btn_back {
+      cursor: pointer;
+    }
+  }
+}
+
+.container__banner {
+  background-image: url("../../assets/images/ourshop.png");
+  background-repeat: no-repeat;
+  height: 279px;
+  background-size: cover;
+  background-position: center;
+  margin-top: 10px;
+
+  .container__content {
+    @include flex(center, center, 30px);
+    flex-direction: column;
+    padding: 60px 0;
+    .title {
+      font-size: 28px;
+      font-weight: 400;
+      color: $four_color;
+    }
+    .btn__content {
+      width: 179px;
+    }
+  }
+}
